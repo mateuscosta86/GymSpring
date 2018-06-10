@@ -5,7 +5,7 @@
 <html>
 
 <head>
-	<title>GymSpring - Relação de Alunos</title>
+	<title>GymSpring - Area do Instrutor</title>
 	
 	<!-- reference our style sheet -->
 
@@ -19,7 +19,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>GymSpring - Relação de Alunos Cadastrados</h2>
+			<h2>GymSpring - Acompanhamento de Alunos</h2>
 		</div>
 	</div>
 	

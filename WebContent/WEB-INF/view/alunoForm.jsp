@@ -4,7 +4,7 @@
 <html>
 
 <head>
-	<title>Save Customer</title>
+	<title>GymSpring - Cadastro</title>
 
 	<link type="text/css"
 		  rel="stylesheet"
@@ -29,7 +29,7 @@
 		<form:form action="salvarAluno" modelAttribute="aluno" method="POST">
 
 			<form:hidden path="id" />
-					
+								
 			<table>
 				<tbody>
 					<tr>

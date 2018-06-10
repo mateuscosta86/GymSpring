@@ -9,4 +9,10 @@ public interface IAlunoService {
 	List<Aluno> getAlunos();
 
 	void salvarAluno(Aluno aluno);
+
+	Aluno getAluno(Long id);
+
+	void apagarAluno(Long id);
+
+	Aluno getAluno(String cpf);
 }

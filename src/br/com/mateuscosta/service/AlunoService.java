@@ -30,4 +30,28 @@ public class AlunoService implements IAlunoService {
 		
 	}
 
+	@Override
+	@Transactional
+	public Aluno getAluno(Long id) {
+		
+		Aluno aluno = alunoDAO.getAluno(id);
+		
+		return aluno;
+	}
+
+	@Override
+	@Transactional
+	public void apagarAluno(Long id) {
+		
+		alunoDAO.apagar(id);		
+	}
+
+	@Override
+	@Transactional
+	public Aluno getAluno(String cpf) {
+		
+		Aluno aluno = alunoDAO.getAluno(cpf);
+		
+		return aluno;
+	}
 }

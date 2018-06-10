@@ -19,9 +19,9 @@ public class AlunoDAO implements IAlunoDAO {
 	@Override
 	public List<Aluno> GetAlunos() {
 		
-		Session currentSession = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		
-		Query<Aluno> query = currentSession.createQuery("from Aluno", Aluno.class);
+		Query<Aluno> query = session.createQuery("from Aluno", Aluno.class);
 		
 		List<Aluno> alunos = query.getResultList();
 		
@@ -33,7 +33,38 @@ public class AlunoDAO implements IAlunoDAO {
 		
 		Session session = sessionFactory.getCurrentSession();
 		
-		session.save(aluno);		
+		session.saveOrUpdate(aluno);		
+	}
+
+	@Override
+	public Aluno getAluno(Long id) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		Aluno aluno = session.get(Aluno.class, id);
+		
+		return aluno;
+	}
+
+	@Override
+	public void apagar(Long id) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		Query query = session.createQuery("delete from Aluno where id=:alunoId");
+		query.setParameter("alunoId", id);
+		
+		query.executeUpdate();		
+	}
+
+	@Override
+	public Aluno getAluno(String cpf) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		Query<Aluno> query = session.createQuery("from Aluno where cpf=:alunoCpf", Aluno.class);
+		query.setParameter("alunoCpf", cpf);
+		
+		Aluno aluno = query.getSingleResult();		
+		return aluno;
 	}
 
 }

@@ -10,4 +10,10 @@ public interface IAlunoDAO {
 
 	public void salvar(Aluno aluno);
 
+	public Aluno getAluno(Long id);
+
+	public void apagar(Long id);
+
+	public Aluno getAluno(String cpf);
+
 }
