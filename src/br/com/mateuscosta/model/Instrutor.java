@@ -134,11 +134,10 @@ public class Instrutor{
 		
 		if ( alunos == null ) {
 			alunos = new ArrayList<Aluno>();
-		}
-		
-		alunos.add(aluno);
-		
+		}		
+
 		aluno.setInstrutor(this);
+		alunos.add(aluno);		
 	}
 
 	@Override

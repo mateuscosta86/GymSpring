@@ -25,8 +25,8 @@ public class InstrutorDAO implements IInstrutorDAO {
 		Query<Instrutor> query = session.createQuery("from Instrutor where cpf=:instrutorCpf", Instrutor.class);
 		query.setParameter("instrutorCpf", cpf);
 		
-		Instrutor instrutor = query.getSingleResult();		
-		return instrutor;
+		List<Instrutor> instrutor = query.getResultList();		
+		return instrutor.isEmpty() ? null : instrutor.get(0);
 	}
 
 	@Override

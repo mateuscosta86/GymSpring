@@ -15,4 +15,6 @@ public interface IAlunoService {
 	void apagarAluno(Long id);
 
 	Aluno getAluno(String cpf);
+
+	void apagarAluno(Aluno aluno);
 }

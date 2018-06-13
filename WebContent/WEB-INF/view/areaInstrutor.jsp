@@ -26,9 +26,7 @@
 	<div id="container">
 	
 		<div id="content">
-		
-			<!-- put new button: Add Customer -->
-		
+					
 			<input type="button" value="Cadastrar Aluno"
 				   onclick="window.location.href='cadastrarAluno'; return false;"
 				   class="add-button"
@@ -44,15 +42,20 @@
 					<th>Ação</th>
 				</tr>
 				
-				<!-- loop over and print our customers -->
+				
 				<c:forEach var="aluno" items="${alunos}">
 				
-					<!-- construct an "update" link with customer id -->
+					
+					<c:url var="addWorkoutLink" value="/instrutor/mostrarListaTreinos">
+						<c:param name="alunoId" value="${aluno.id}" />
+					</c:url>
+					
+					
 					<c:url var="updateLink" value="/aluno/atualizarAluno">
 						<c:param name="alunoId" value="${aluno.id}" />
 					</c:url>					
 
-					<!-- construct an "delete" link with customer id -->
+					
 					<c:url var="deleteLink" value="/aluno/apagarAluno">
 						<c:param name="alunoId" value="${aluno.id}" />
 					</c:url>					
@@ -64,6 +67,8 @@
 						
 						<td>
 							<!-- display the update link -->
+							<a href="${addWorkoutLink}">Treinos</a>
+							|
 							<a href="${updateLink}">Editar</a>
 							|
 							<a href="${deleteLink}"
@@ -75,6 +80,9 @@
 				</c:forEach>
 						
 			</table>
+			<p>
+				<a href="${pageContext.request.contextPath}/fazerLogout">Fazer Logout.</a>
+			</p>
 				
 		</div>
 	

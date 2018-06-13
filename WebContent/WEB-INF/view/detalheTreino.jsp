@@ -26,17 +26,7 @@
 	<div id="container">
 	
 		<div id="content">
-		
-			<!-- put new button: Add Customer 
-		
-			<input type="button" value="Cadastrar Aluno"
-				   onclick="window.location.href='cadastrarAluno'; return false;"
-				   class="add-button"
-			/>
-			-->
-		
-			<!--  add our html table here -->
-		
+				
 			<table>
 				<tr>
 					<th>Nome</th>
@@ -55,28 +45,26 @@
 			
 			<table>
 				<tr>
-					<th>ID</th>
-					<th>Data de Criação</th>
-					<th>Ações</th>					
+					<th>Nome</th>
+					<th>Séries</th>
+					<th>Repetições</th>
+					<th>Tempo</th>					
 				</tr>
 				
-				<c:forEach var="treino" items="${aluno.treinos}">
-				
-				<c:url var="viewLink" value="/aluno/visualizarTreino">
-						<c:param name="treinoId" value="${treino.id}" />
-						<c:param name="alunoId" value="${usuario}" />
-				</c:url>
-				
+				<c:forEach var="exercicio" items="${treino.exercicios}">
+												
 				<tr>
-					<td> ${treino.id} </td>
-					<td> ${treino.dataCriacao} </td>
-					<td> <a href="${viewLink}">Visualizar</a> </td>
-					
+					<td> ${exercicio.nome} </td>
+					<td> ${exercicio.series} </td>
+					<td> ${exercicio.repeticoes} </td>
+					<td> ${exercicio.tempo} </td>
 				</tr>
 				</c:forEach>	
 														
 			</table>
-			
+			<p>
+				<a href="${pageContext.request.contextPath}/aluno/areaAluno">Retornar.</a>
+			</p>
 			<p>
 				<a href="${pageContext.request.contextPath}/fazerLogout">Fazer Logout.</a>
 			</p>

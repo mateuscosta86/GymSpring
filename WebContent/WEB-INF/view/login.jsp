@@ -28,7 +28,13 @@
 		<h3>Login</h3>
 		<c:if test = "${loginFailed}">
 			<p>Usuario ou senha inválido<p>
-		</c:if>		
+		</c:if>
+		<c:if test = "${papelNaoSelecionado}">
+			<p>É necessário escolher perfil de usuário (Professor ou Aluno).<p>
+		</c:if>
+		<c:if test = "${camposNaoPreenchidos}">
+			<p>Usuário ou senha não preenchidos.<p>
+		</c:if>
 	
 		<form:form action="efetuarLogin" modelAttribute="dadosLogin" method="POST">
 					
@@ -41,13 +47,19 @@
 					</tr>
 					
 					<tr>
-						<td><label>Senha:</label></td>
+						<td><label>Senha:</label></td>	
 						<td><form:password path="senha" /></td>
 					</tr>
 					
 					<tr>
-						<td><label>Professor<form:radiobutton path="papel" value="professor" /></label></td>
-						<td><label>Aluno<form:radiobutton path="papel" value="aluno" /></label></td>
+						<td><label>Aluno</label></td>					
+						<td><form:radiobutton path="papel" value="aluno" /></td>
+							
+					</tr>
+					
+					<tr>	
+						<td><label>Professor</label></td>				
+						<td><form:radiobutton path="papel" value="professor" /></td>
 							
 					</tr>
 

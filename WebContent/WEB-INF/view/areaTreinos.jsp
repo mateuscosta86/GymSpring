@@ -5,7 +5,7 @@
 <html>
 
 <head>
-	<title>GymSpring - Area do Aluno</title>
+	<title>GymSpring - Area de Treinos</title>
 	
 	<!-- reference our style sheet -->
 
@@ -19,7 +19,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>GymSpring - Area do Aluno</h2>
+			<h2>GymSpring - Área de Treinos</h2>
 		</div>
 	</div>
 	
@@ -27,16 +27,16 @@
 	
 		<div id="content">
 		
-			<!-- put new button: Add Customer 
-		
-			<input type="button" value="Cadastrar Aluno"
-				   onclick="window.location.href='cadastrarAluno'; return false;"
+			<c:url var="createLink" value="/instrutor/cadastrarTreino">
+						<c:param name="alunoId" value="${aluno.id}" />						
+			</c:url>
+				
+			<input type="button" value="Cadastrar Treino"
+				   onclick="window.location.href='${createLink}'; return false;"
 				   class="add-button"
 			/>
-			-->
-		
-			<!--  add our html table here -->
-		
+					
+					
 			<table>
 				<tr>
 					<th>Nome</th>
@@ -49,8 +49,7 @@
 					<td> ${aluno.sobrenome} </td>
 					<td> ${aluno.cpf} </td>
 					
-				</tr>
-										
+				</tr>										
 			</table>
 			
 			<table>
@@ -62,25 +61,36 @@
 				
 				<c:forEach var="treino" items="${aluno.treinos}">
 				
-				<c:url var="viewLink" value="/aluno/visualizarTreino">
+				<c:url var="updateLink" value="/instrutor/gerenciarTreino">
+						<c:param name="alunoId" value="${aluno.id}" />
 						<c:param name="treinoId" value="${treino.id}" />
-						<c:param name="alunoId" value="${usuario}" />
 				</c:url>
-				
+				<c:url var="deleteLink" value="/instrutor/apagarTreino">
+						<c:param name="alunoId" value="${aluno.id}" />
+						<c:param name="treinoId" value="${treino.id}" />
+				</c:url>
+					
 				<tr>
 					<td> ${treino.id} </td>
 					<td> ${treino.dataCriacao} </td>
-					<td> <a href="${viewLink}">Visualizar</a> </td>
+					<td><!-- display the update link -->
+						<a href="${updateLink}">Gerenciar</a>
+						|
+						<a href="${deleteLink}"
+					    	onclick="if (!(confirm('Tem certeza que quer apagar este treino?'))) return false">Apagar</a>
+					</td>
 					
 				</tr>
 				</c:forEach>	
 														
 			</table>
 			
+			<div style="clear; both;"></div>
+		
 			<p>
-				<a href="${pageContext.request.contextPath}/fazerLogout">Fazer Logout.</a>
+				<a href="${pageContext.request.contextPath}/instrutor/relacaoAlunos">Voltar para a relacação de alunos.</a>
 			</p>
-				
+					
 		</div>
 	
 	</div>

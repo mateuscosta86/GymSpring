@@ -54,4 +54,10 @@ public class AlunoService implements IAlunoService {
 		
 		return aluno;
 	}
+
+	@Override
+	@Transactional
+	public void apagarAluno(Aluno aluno) {
+		alunoDAO.apagar(aluno);
+	}
 }

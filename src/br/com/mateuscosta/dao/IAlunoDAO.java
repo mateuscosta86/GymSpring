@@ -16,4 +16,6 @@ public interface IAlunoDAO {
 
 	public Aluno getAluno(String cpf);
 
+	public void apagar(Aluno aluno);
+
 }

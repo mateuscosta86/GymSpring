@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import br.com.mateuscosta.helpers.Helpers;
 import br.com.mateuscosta.model.Aluno;
 import br.com.mateuscosta.model.Instrutor;
+import br.com.mateuscosta.model.Treino;
 import br.com.mateuscosta.service.IAlunoService;
 import br.com.mateuscosta.service.IInstrutorService;
-import br.com.mateuscosta.service.InstrutorService;
+import br.com.mateuscosta.service.ITreinoService;
+
 
 @Controller
 @RequestMapping("/aluno")
@@ -29,6 +31,9 @@ public class AlunoController {
 	
 	@Autowired
 	IInstrutorService instrutorService;
+	
+	@Autowired
+	ITreinoService treinoService;
 	
 	@GetMapping("/listar")
 	public String ListarAlunos(Model model) {
@@ -75,9 +80,11 @@ public class AlunoController {
 	@GetMapping("/apagarAluno")
 	public String apagarAluno(@RequestParam("alunoId") Long id) {
 		
-		alunoService.apagarAluno(id);
+		Aluno aluno = alunoService.getAluno(id);
+		alunoService.apagarAluno(aluno);
+		// alunoService.apagarAluno(id);
 		
-		return "redirect:/aluno/listar";
+		return "redirect:/instrutor/relacaoAlunos";
 	}
 	
 	@GetMapping("/areaAluno")
@@ -94,5 +101,16 @@ public class AlunoController {
 		model.addAttribute("aluno", aluno);
 		
 		return "areaAluno";
+	}
+	
+	@GetMapping("/visualizarTreino")
+	public String VisualizarTreino(@RequestParam("treinoId") Long treinoId, @RequestParam("alunoId") Long alunoId, Model model) {
+		
+		Treino treino = treinoService.getTreino(treinoId);
+		Aluno aluno = alunoService.getAluno(alunoId);
+		model.addAttribute("treino", treino);
+		model.addAttribute("aluno", aluno);
+		
+		return "detalheTreino";
 	}
 }

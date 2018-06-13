@@ -1,9 +1,5 @@
 package br.com.mateuscosta.controller;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,9 +30,7 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String MostrarPaginaLogin(Model model, HttpServletRequest request) {
-		
-		
-		
+				
 		if (Helpers.ChecaVarivavelSessao(request, "logadoComo")) {
 			
 			String logado = request.getSession().getAttribute("logadoComo").toString();
@@ -67,6 +61,16 @@ public class HomeController {
 	
 	@PostMapping("/efetuarLogin")
 	public String EfetuarLogin(@ModelAttribute("dadosLogin") LoginData dadosLogin, Model model, HttpServletRequest request ) {
+				
+		if (dadosLogin.getPapel() == null) {
+			model.addAttribute("papelNaoSelecionado", true);
+			return "login";
+		}
+		
+		if (dadosLogin.getCpf().equals("") || dadosLogin.getSenha().equals("")) {
+			model.addAttribute("camposNaoPreenchidos", true);
+			return "login";
+		}
 		
 		if (dadosLogin.getPapel().equals("aluno")) {
 			
@@ -97,11 +101,17 @@ public class HomeController {
 			Instrutor instrutor = instrutorService.getInstrutor(dadosLogin.getCpf());
 			
 			if( instrutor != null ) {
-				
-				request.getSession().setAttribute("usuario", instrutor.getId());
-				request.getSession().setAttribute("logadoComo", dadosLogin.getPapel());
-				
-				return "redirect:/instrutor/relacaoAlunos";				
+				if(dadosLogin.getSenha().equals(instrutor.getSenha())) {
+
+					request.getSession().setAttribute("usuario", instrutor.getId());
+					request.getSession().setAttribute("logadoComo", dadosLogin.getPapel());
+					
+					return "redirect:/instrutor/relacaoAlunos";
+				}
+				else {
+					model.addAttribute("loginFailed", true);
+					return "login";
+				}								
 			}
 			else {
 				model.addAttribute("loginFailed", true);
@@ -110,7 +120,7 @@ public class HomeController {
 			
 		}
 		else {
-			return "alunoList";
+			return "login";
 		}
 	}
 	
@@ -118,5 +128,18 @@ public class HomeController {
 	public String ChecarLogin(Model model) {
 					
 		return "checarLogin";
+	}
+	
+	@GetMapping("/fazerLogout")
+	public String Logout(HttpServletRequest request) {
+		
+		request.getSession().removeAttribute("aSeremRemovidos");
+		request.getSession().removeAttribute("logadoComo");
+		request.getSession().removeAttribute("usurario");
+		request.getSession().removeAttribute("exericios");
+		request.getSession().removeAttribute("alunoId");
+		request.getSession().removeAttribute("treinoId");
+		
+		return "redirect:/";
 	}
 }

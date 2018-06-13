@@ -166,7 +166,7 @@ public class Aluno {
 		if ( pagamentos == null ) {
 			pagamentos = new ArrayList<Pagamento>();
 		}
-		
+		pagamento.setAluno(this);
 		pagamentos.add(pagamento);
 	}
 	
@@ -174,7 +174,7 @@ public class Aluno {
 		if ( treinos == null ) {
 			treinos = new ArrayList<Treino>();
 		}
-		
+		treino.setAluno(this);
 		treinos.add(treino);
 	}
 	
