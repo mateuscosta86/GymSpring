@@ -1,6 +1,5 @@
 package br.com.mateuscosta.controller;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import br.com.mateuscosta.helpers.Helpers;
 import br.com.mateuscosta.model.Aluno;
 import br.com.mateuscosta.model.Exercicio;
 import br.com.mateuscosta.model.Instrutor;
